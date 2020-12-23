@@ -1,11 +1,14 @@
 package uz.pop.astroidradar.api
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import uz.pop.astroidradar.Asteroid
 import uz.pop.astroidradar.database.DatabaseAsteroid
 
 @JsonClass(generateAdapter = true)
-data class NetworkAsteroidContainer(val asteroids: List<NetworkAsteroid>)
+data class NetworkAsteroidContainer(
+//    @Json(name = "asteroids")
+    val asteroids: List<NetworkAsteroid>)
 
 @JsonClass(generateAdapter = true)
 data class NetworkAsteroid(

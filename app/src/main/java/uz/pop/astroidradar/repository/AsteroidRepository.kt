@@ -19,7 +19,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
 
     suspend fun refreshAsteroids(){
         withContext(Dispatchers.IO){
-            val photosAsteroids = AsteroidApi.retrofitService.getProperties().await()
+            val photosAsteroids = AsteroidApi.retrofitService.getProperties()
             database.asteroidDao.insertAll(*photosAsteroids.asDatabaseModel())
         }
     }

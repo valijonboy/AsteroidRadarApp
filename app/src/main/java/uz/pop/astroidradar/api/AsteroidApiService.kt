@@ -20,15 +20,16 @@ interface AsteroidApiService {
 
     @Headers("Accept-Version: v1", "Authorization: Client-ID $CLIENT_ID")
     @GET("neo/rest/v1/feed?&api_key=${CLIENT_ID}")
-    suspend fun getProperties(): Deferred<NetworkAsteroidContainer>
+    suspend fun getProperties(): NetworkAsteroidContainer
 }
 
 object AsteroidApi {
     private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .baseUrl(BASE_URL)
         .build()
 
-    val retrofitService = retrofit.create(AsteroidApiService::class.java)
+    val retrofitService: AsteroidApiService = retrofit.create(AsteroidApiService::class.java)
 }
