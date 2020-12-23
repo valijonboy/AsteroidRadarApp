@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="asteroid"
-            type="uz.pop.astroidradar.Asteroid" />
+            name="database"
+            type="uz.pop.astroidradar.database.DatabaseAsteroid" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             tools:text="(2016 BA39)"
-            android:text="@{asteroid.codename}"
+            android:text="@{database.codename}"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@android:color/white"
@@ -39,18 +39,18 @@
             android:id="@+id/approach_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@{asteroid.closeApproachDate}"
-            tools:text="2020-12-22"
-            android:textSize="16sp"
+            android:text="@{database.closeApproachDate}"
             android:textColor="@android:color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/name"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="2020-12-22" />
 
         <ImageView
             android:id="@+id/ic_status"

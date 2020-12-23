@@ -5,36 +5,36 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import uz.pop.astroidradar.Asteroid
+import uz.pop.astroidradar.database.DatabaseAsteroid
 import uz.pop.astroidradar.databinding.ListItemBinding
 
-class AsteroidAdapter: ListAdapter<Asteroid, AsteroidAdapter.AsteroidViewHolder>(DiffCallback) {
+class AsteroidAdapter: ListAdapter<DatabaseAsteroid, AsteroidAdapter.AsteroidViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AsteroidViewHolder {
         return AsteroidViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: AsteroidViewHolder, position: Int) {
-        val asteroidRadar = getItem(position)
-        holder.bind(asteroidRadar)
+        val databaseAsteroid = getItem(position)
+        holder.bind(databaseAsteroid)
     }
 
     class AsteroidViewHolder(private val binding: ListItemBinding):
             RecyclerView.ViewHolder(binding.root){
-                fun bind(asteroidRadar: Asteroid){
-                    binding.asteroid = asteroidRadar
-                    binding.name.text = asteroidRadar.codename
-                    binding.approachDate.text = asteroidRadar.closeApproachDate
+                fun bind(database: DatabaseAsteroid){
+                    binding.database = database
+                    binding.name.text = database.codename
+                    binding.approachDate.text = database.closeApproachDate
                     binding.executePendingBindings()
                 }
             }
 
-   companion object DiffCallback : DiffUtil.ItemCallback<Asteroid>(){
-       override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+   companion object DiffCallback : DiffUtil.ItemCallback<DatabaseAsteroid>(){
+       override fun areItemsTheSame(oldItem: DatabaseAsteroid, newItem: DatabaseAsteroid): Boolean {
            return oldItem == newItem
        }
 
-       override fun areContentsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+       override fun areContentsTheSame(oldItem: DatabaseAsteroid, newItem: DatabaseAsteroid): Boolean {
          return  oldItem.id == newItem.id
        }
    }
