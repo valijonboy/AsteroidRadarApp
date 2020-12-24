@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="database"
-            type="uz.pop.astroidradar.database.DatabaseAsteroid" />
+            name="asteroid"
+            type="uz.pop.astroidradar.Asteroid" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             tools:text="(2016 BA39)"
-            android:text="@{database.codename}"
+            android:text="@{asteroid.codename}"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@android:color/white"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@{database.closeApproachDate}"
+            android:text="@{asteroid.closeApproachDate}"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

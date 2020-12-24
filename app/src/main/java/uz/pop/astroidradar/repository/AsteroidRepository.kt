@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import uz.pop.astroidrad.AsteroidApi
 import uz.pop.astroidradar.Asteroid
-import uz.pop.astroidradar.api.asDatabaseModel
+import uz.pop.astroidradar.api.parseAsteroidsJsonResult
 import uz.pop.astroidradar.database.AsteroidDatabase
+import uz.pop.astroidradar.database.DatabaseAsteroid
 import uz.pop.astroidradar.database.asDomainModel
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
@@ -19,8 +21,22 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
 
     suspend fun refreshAsteroids(){
         withContext(Dispatchers.IO){
-            val photosAsteroids = AsteroidApi.retrofitService.getProperties()
-            database.asteroidDao.insertAll(*photosAsteroids.asDatabaseModel())
+            val jsonResult = AsteroidApi.retrofitService.getProperties()
+            val asteroids = parseAsteroidsJsonResult(JSONObject(jsonResult))
+            val photosAsteroids = mutableListOf<DatabaseAsteroid>()
+            print(asteroids)
+
+            for (asteroid in asteroids){
+                val databaseAsteroid = DatabaseAsteroid(
+                    asteroid.id, asteroid.codename, asteroid.closeApproachDate,
+                    asteroid.absoluteMagnitude, asteroid.estimatedDiameter,
+                    asteroid.relativeVelocity, asteroid.distanceFromEarth,
+                    asteroid.isPotentiallyHazardous
+                )
+
+                photosAsteroids.add(databaseAsteroid)
+            }
+            database.asteroidDao.insertAll(photosAsteroids.toList())
         }
     }
 }

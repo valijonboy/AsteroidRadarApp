@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import uz.pop.astroidradar.Constants.BASE_URL
@@ -20,15 +21,16 @@ interface AsteroidApiService {
 
     @Headers("Accept-Version: v1", "Authorization: Client-ID $CLIENT_ID")
     @GET("neo/rest/v1/feed?&api_key=${CLIENT_ID}")
-    suspend fun getProperties(): NetworkAsteroidContainer
+    suspend fun getProperties(): String
 }
 
 object AsteroidApi {
     private val retrofit = Retrofit.Builder()
-
+        .baseUrl(BASE_URL)
+        .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl(BASE_URL)
+
         .build()
 
     val retrofitService: AsteroidApiService = retrofit.create(AsteroidApiService::class.java)

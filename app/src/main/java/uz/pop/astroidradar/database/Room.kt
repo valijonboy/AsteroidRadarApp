@@ -10,10 +10,10 @@ interface AsteroidDao{
     fun getAsteroids(): LiveData<List<DatabaseAsteroid>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg asteroids: DatabaseAsteroid)
+     fun insertAll(asteroids: List<DatabaseAsteroid>)
 }
 
-@Database(entities = [DatabaseAsteroid::class], version = 1)
+@Database(entities = [DatabaseAsteroid::class], version = 1, exportSchema = false)
 abstract class AsteroidDatabase: RoomDatabase(){
     abstract val asteroidDao: AsteroidDao
 }
