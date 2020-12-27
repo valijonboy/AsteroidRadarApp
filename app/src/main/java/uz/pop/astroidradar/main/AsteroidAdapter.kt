@@ -11,12 +11,12 @@ import uz.pop.astroidradar.databinding.ListItemBinding
 
 class AsteroidAdapter: ListAdapter<Asteroid, AsteroidAdapter.AsteroidViewHolder>(DiffCallback) {
 
-    var asteroids : List<Asteroid> = emptyList()
-    set(value) {
-        field = value
-
-        notifyDataSetChanged()
-    }
+//    var asteroids : List<Asteroid> = emptyList()
+//    set(value) {
+//        field = value
+//
+//        notifyDataSetChanged()
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AsteroidViewHolder {
         return AsteroidViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -31,8 +31,8 @@ class AsteroidAdapter: ListAdapter<Asteroid, AsteroidAdapter.AsteroidViewHolder>
             RecyclerView.ViewHolder(binding.root){
                 fun bind(asteroid: Asteroid){
                     binding.asteroid = asteroid
-                    binding.name.text = asteroid.codename
-                    binding.approachDate.text = asteroid.closeApproachDate
+//                    binding.name.text = asteroid.codename
+//                    binding.approachDate.text = asteroid.closeApproachDate
                     binding.executePendingBindings()
                 }
             }

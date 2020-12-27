@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import uz.pop.astroidrad.AsteroidApi
 import uz.pop.astroidradar.Asteroid
-import uz.pop.astroidradar.api.parseAsteroidsJsonResult
+import uz.pop.astroidradar.api.parseStringToAsteroidList
 import uz.pop.astroidradar.database.AsteroidDatabase
 import uz.pop.astroidradar.database.DatabaseAsteroid
 import uz.pop.astroidradar.database.asDomainModel
+
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
 
@@ -22,7 +22,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     suspend fun refreshAsteroids(){
         withContext(Dispatchers.IO){
             val jsonResult = AsteroidApi.retrofitService.getProperties()
-            val asteroids = parseAsteroidsJsonResult(JSONObject(jsonResult))
+            val asteroids = parseStringToAsteroidList(jsonResult)
             val photosAsteroids = mutableListOf<DatabaseAsteroid>()
             print(asteroids)
 
