@@ -20,8 +20,16 @@ class MainFragment : Fragment() {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-   private var adapter : AsteroidAdapter? = null
+   private var adapter =  AsteroidAdapter()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.asteroids.observe(viewLifecycleOwner, { asteroids ->
+           asteroids?.apply {
+               adapter.submitList(this)
+           }
+        })
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val binding = FragmentMainBinding.inflate(inflater)
@@ -37,11 +45,7 @@ class MainFragment : Fragment() {
 
         binding.asteroidRecycler.adapter = adapter
 
-        mainViewModel.asteroids.observe(viewLifecycleOwner, {
-            it?.let {
-                adapter?.submitList(it)
-            }
-        })
+
 
         setHasOptionsMenu(true)
 

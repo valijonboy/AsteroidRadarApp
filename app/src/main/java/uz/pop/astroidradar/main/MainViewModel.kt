@@ -3,6 +3,7 @@ package uz.pop.astroidradar.main
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import uz.pop.astroidradar.Asteroid
+import uz.pop.astroidradar.pictureoftheday.PictureOfDay
 import uz.pop.astroidradar.repository.AsteroidRepository
 
 enum class AsteroidStatus{ LOADING, ERROR, DONE}
@@ -14,6 +15,9 @@ class MainViewModel( private val repository : AsteroidRepository): ViewModel() {
     private val _status = MutableLiveData<AsteroidStatus>()
     val status: LiveData<AsteroidStatus> get() = _status
 
+    private val _image = MutableLiveData<PictureOfDay>()
+    val image: LiveData<PictureOfDay> get() = _image
+
     private val filters = MutableLiveData(AsteroidFilter.WEEKLY)
 
     private val _asteroids = MutableLiveData<List<Asteroid>>()
@@ -24,6 +28,7 @@ class MainViewModel( private val repository : AsteroidRepository): ViewModel() {
 
     init {
         viewModelScope.launch {
+            getPictureOfDay()
             getAsteroidsStatus()
         }
     }
@@ -42,6 +47,22 @@ class MainViewModel( private val repository : AsteroidRepository): ViewModel() {
             }
         }
     }
+
+    private fun getPictureOfDay(){
+        viewModelScope.launch {
+            try {
+                _status.value = AsteroidStatus.LOADING
+                repository.getPicturesFromNetwork()
+               _image.value =  repository.getPicturesAsteroids()
+            }catch (e: Exception){
+                _status.value = AsteroidStatus.ERROR
+            }finally {
+                _status.value = AsteroidStatus.DONE
+            }
+        }
+    }
+
+
 
     fun setFilter(filter: AsteroidFilter){
         filters.postValue(filter)

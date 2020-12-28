@@ -3,6 +3,7 @@ package uz.pop.astroidradar.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import uz.pop.astroidradar.pictureoftheday.DatabasePicture
 
 @Dao
 interface AsteroidDao {
@@ -18,10 +19,14 @@ interface AsteroidDao {
     @Query("select * from databaseasteroid where closeApproachDate between :startDate and :endDate")
     fun getWeeklyAsteroids(startDate: String, endDate: String): LiveData<List<DatabaseAsteroid>>
 
+    @Query("select * from picture_of_day")
+    fun getPicture(): DatabasePicture
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPicture(picture: DatabasePicture)
 }
 
-@Database(entities = [DatabaseAsteroid::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseAsteroid::class, DatabasePicture::class], version = 2, exportSchema = false)
 abstract class AsteroidDatabase : RoomDatabase() {
     abstract val asteroidDao: AsteroidDao
 
