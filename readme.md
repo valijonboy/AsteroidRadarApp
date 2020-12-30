@@ -9,10 +9,10 @@ The app is consists of two screens: A Main screen with a list of all the detecte
 This kind of app is one of the most usual in the real world, what you will learn by doing this are some of the most fundamental skills you need to know to work as a professional Android developer, as fetching data from the internet, saving data to a database, and display the data in a clear, clear, compelling UI.
 
 ###  [Screenshots](https://github.com/valijonboy/AsteroidRadarApp/tree/master/screenshots)
-[](https://github.com/valijonboy/AsteroidRadarApp/blob/master/screenshots/screen_1.png)
-[](https://github.com/valijonboy/AsteroidRadarApp/blob/master/screenshots/screen_2.png)
-[](https://github.com/valijonboy/AsteroidRadarApp/blob/master/screenshots/screen_3.png)
-[](https://github.com/valijonboy/AsteroidRadarApp/blob/master/screenshots/screen_4.png)
+![screen_1.png](https://github.com/valijonboy/AsteroidRadarApp/raw/master/screenshots/screen_1.png)
+![screen_2.png](https://github.com/valijonboy/AsteroidRadarApp/raw/master/screenshots/screen_2.png)
+![screen_3.png](https://github.com/valijonboy/AsteroidRadarApp/raw/master/screenshots/screen_3.png)
+![screen_4.png](https://github.com/valijonboy/AsteroidRadarApp/raw/master/screenshots/screen_4.png)
 
 ### Project Instructions
  In this project I used these the most important dependencies:
