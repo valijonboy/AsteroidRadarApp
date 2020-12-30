@@ -6,22 +6,26 @@
     <data>
         <variable
             name="asteroid"
-            type="uz.pop.astroidradar.Asteroid" />
+            type="uz.pop.astroidradar.api.Asteroid" />
+
+        <variable
+            name="onClick"
+            type="uz.pop.astroidradar.main.AsteroidAdapter.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> onClick.onClick(asteroid)}">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/standart_margin_16"
             android:text="@{asteroid.codename}"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+           style="@style/CodeNameStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -33,17 +37,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
+            app:layout_constraintGuide_begin="@dimen/standart_margin_16" />
 
         <TextView
             android:id="@+id/approach_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/standart_margin_16"
             android:text="@{asteroid.closeApproachDate}"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
+            style="@style/ApproachDateStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -59,6 +62,8 @@
             android:contentDescription="@{asteroid.codename}"
             app:layout_constraintBottom_toBottomOf="@+id/approach_date"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/approach_date"
             app:layout_constraintTop_toTopOf="@+id/name"
             app:srcCompat="@drawable/ic_status_potentially_hazardous"
             app:statusIcon="@{asteroid.potentiallyHazardous}" />
@@ -67,7 +72,10 @@
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="395dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_begin="395dp"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

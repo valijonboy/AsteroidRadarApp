@@ -1,5 +1,6 @@
-package uz.pop.astroidradar
+package uz.pop.astroidradar.utils
 
+import uz.pop.astroidradar.BuildConfig
 
 
 object Constants {

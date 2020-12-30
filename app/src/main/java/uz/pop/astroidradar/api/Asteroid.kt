@@ -1,7 +1,6 @@
-package uz.pop.astroidradar
+package uz.pop.astroidradar.api
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

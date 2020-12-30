@@ -11,22 +11,22 @@ interface AsteroidDao {
     fun getAsteroids(): LiveData<List<DatabaseAsteroid>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(asteroids: List<DatabaseAsteroid>)
+     fun insertAll(asteroids: List<DatabaseAsteroid>)
 
     @Query("select * from databaseasteroid where closeApproachDate = :date order by closeApproachDate desc")
     fun getTodaysAsteroids(date: String): LiveData<List<DatabaseAsteroid>>
 
     @Query("select * from databaseasteroid where closeApproachDate between :startDate and :endDate")
-    fun getWeeklyAsteroids(startDate: String, endDate: String): LiveData<List<DatabaseAsteroid>>
+     fun getWeeklyAsteroids(startDate: String, endDate: String): LiveData<List<DatabaseAsteroid>>
 
     @Query("select * from picture_of_day")
-    fun getPicture(): DatabasePicture
+    suspend fun getPicture(): DatabasePicture
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPicture(picture: DatabasePicture)
+    suspend fun insertPicture(picture: DatabasePicture)
 }
 
-@Database(entities = [DatabaseAsteroid::class, DatabasePicture::class], version = 2, exportSchema = false)
+@Database(entities = [DatabaseAsteroid::class, DatabasePicture::class], version = 5, exportSchema = false)
 abstract class AsteroidDatabase : RoomDatabase() {
     abstract val asteroidDao: AsteroidDao
 

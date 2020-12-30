@@ -2,8 +2,7 @@ package uz.pop.astroidradar.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import uz.pop.astroidradar.Asteroid
-import uz.pop.astroidradar.api.NetworkAsteroidContainer
+import uz.pop.astroidradar.api.Asteroid
 
 @Entity
 data class DatabaseAsteroid constructor(

@@ -1,7 +1,7 @@
 package uz.pop.astroidradar.pictureoftheday
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "picture_of_day")
 data class DatabasePicture constructor(

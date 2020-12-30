@@ -1,8 +1,9 @@
 package uz.pop.astroidradar.api
 
 import com.squareup.moshi.JsonClass
-import uz.pop.astroidradar.Asteroid
 import uz.pop.astroidradar.database.DatabaseAsteroid
+import uz.pop.astroidradar.pictureoftheday.DatabasePicture
+import uz.pop.astroidradar.pictureoftheday.PictureOfDay
 
 @JsonClass(generateAdapter = true)
 data class NetworkAsteroidContainer(
@@ -41,4 +42,21 @@ fun NetworkAsteroidContainer.asDatabaseModel(): Array<DatabaseAsteroid>{
             distanceFromEarth = it.distanceFromEarth,
             isPotentiallyHazardous = it.isPotentiallyHazardous)
     }.toTypedArray()
+}
+
+@JsonClass(generateAdapter = true)
+data class NetworkPictureOfDayContainer(val picture: PictureOfDay)
+
+@JsonClass(generateAdapter = true)
+data class NetworkPictureOfDay(
+    val mediaType: String,
+    val title: String,
+    val url: String)
+
+fun NetworkPictureOfDayContainer.asDomainModel(): PictureOfDay{
+    return PictureOfDay(picture.mediaType, picture.title, picture.url)
+}
+
+fun NetworkPictureOfDayContainer.asDatabaseModel(): DatabasePicture{
+    return DatabasePicture(picture.mediaType, picture.title, picture.url)
 }
