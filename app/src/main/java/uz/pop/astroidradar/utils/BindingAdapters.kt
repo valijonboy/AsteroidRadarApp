@@ -87,3 +87,12 @@ fun bindProgress(progressBar: ProgressBar, status: AsteroidStatus?){
 
     }
 }
+
+@BindingAdapter("asteroidContentDescription")
+fun bindContentDescription(imageView: ImageView, isHazardous: Boolean){
+    if (isHazardous) {
+        imageView.contentDescription = imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
+    } else {
+        imageView.contentDescription = imageView.context.getString(R.string.not_hazardous_asteroid_image)
+    }
+}
